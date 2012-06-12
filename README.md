@@ -4,7 +4,7 @@ libguides-profile-grabber
 Grab profile boxes from Libguides (until LibGuides builds this into the API)
 
 This is a temporary solution to a roblem described at
-[Is it possible to search librarian profiles in LibGuides and embed matches on other pages?]()http://libraries.stackexchange.com/questions/650/is-it-possible-to-search-librarian-profiles-in-libguides-and-embed-matches-on-ot)
+[Is it possible to search librarian profiles in LibGuides and embed matches on other pages?](http://libraries.stackexchange.com/questions/650/is-it-possible-to-search-librarian-profiles-in-libguides-and-embed-matches-on-ot)
 
 I asked:
 
