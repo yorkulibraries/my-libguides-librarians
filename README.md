@@ -21,3 +21,19 @@ Sean Hannan replied:
 > That is a slow and incredibly roundabout way of getting what you are after. You might have more luck asking Springshare for this feature as they are quite responsive when it comes to feature requests (in my experience).
 
 I submitted the request to LibGuides (on Twitter!) and they put it into their request system. Until it's ready, this could work.
+
+# Usage
+
+Edit your LibGuides instituional ID in each file.
+
+Run this as cronjob somewhere: `grok-libguides > librarian-mapping.txt`
+
+Then run `get-libguides-profile` as a CGI, and when you call it, pass in `code=AP/PSYC` or some such code.
+
+It will return the profile box from LibGuides for all matching librarians.
+
+Note: requires that "Subject tags" has been added as a custom field to the librarian profiles.
+
+This is very specific to [York University Libraries](http://www.library.yorku.ca/) right now.
+
+
