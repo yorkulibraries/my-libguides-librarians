@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+
+# William Denton <wtd@pobox.com>
+
+
+
+# Usage:
+#
+# Call as a web service: give it a subject and it will return the HTML
+# to show the LibGuides profile for that subject's librarian
+
+require "cgi"
+require 'net/http'
+cgi = CGI.new
+
+mapfile = "libguides-mapping.txt"
+
+libguides_iid = 1669
+
+libguides_domain = "api.libguides.com"
+libguides_path   = "/api_profile.php?iid=#{libguides_iid}&uid="
+
+params = cgi.params
+codes = params["codes"][0].split(",")
+
+File.open(mapfile).each do |row|
+  profile_info = row.split("|")
+  codes.each do |code|
+    if profile_info[2] =~ /#{code}/i
+      puts Net::HTTP.get(libguides_domain, libguides_path + profile_info[1])
+    end
+  end
+end

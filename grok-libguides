@@ -1,0 +1,49 @@
+#!/usr/bin/env ruby
+
+# Download list of all profiles of people with published guides,
+# and save the name, ID number, and tags to a file.
+#
+# Suitable for running once a day in a cron job.
+#
+# Note: requires that "Subject tags" has been added as a custom
+# field to the librarian profiles.
+#
+# Usage:
+# ./grok-libguides > libguides-mapping.txt
+
+require 'net/http'
+
+# Replace with your LibGuides institutional ID.
+libguides_iid = 1669
+
+
+profile_list = URI("http://api.libguides.com/api_users.php?iid=#{libguides_iid}")
+
+Net::HTTP.start(profile_list.host, profile_list.port) do |http|
+  request = Net::HTTP::Get.new profile_list.request_uri
+  response = http.request request # Net::HTTPResponse object
+
+  response.body.each_line do |line|
+    uid = line[/uid=(\d+)/, 1]
+
+    profile_uri = URI("http://api.libguides.com/api_profile.php?incempty=false&iid=#{libguides_iid}&uid=#{uid}")
+
+    # puts profile_uri
+    
+    Net::HTTP.start(profile_uri.host, profile_uri.port) do |http|
+      content_request = Net::HTTP::Get.new profile_uri.request_uri
+      content = http.request content_request # Net::HTTPResponse object
+    
+      # <b>Subject tags:</b><BR>s:AB/CDEF,s:ZY/XWVU</div></div></td> etc.
+      tags = content.body[/Subject tags:<\/b><BR>(.*)<\/div><\/div><\/td>/i, 1] || ""
+
+      # <div class="profile_display_name">Suzanne Dubeau</div>
+      name = content.body[/<div class="profile_display_name">([\s\w\.]*)/, 1] || ""
+
+      puts name + "|" + uid + "|" + tags
+    
+    end
+
+  end
+
+end
