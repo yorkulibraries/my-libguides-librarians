@@ -1,33 +1,77 @@
 #!/usr/bin/env ruby
 
 # William Denton <wtd@pobox.com>
-
-
-
 # Usage:
 #
-# Call as a web service: give it a subject and it will return the HTML
-# to show the LibGuides profile for that subject's librarian
+# Call as a web service: give it a subject and it will return an RSS feed
+# linking to the LibGuides profile for that subject's librarian
 
-require "cgi"
+require 'cgi'
 require 'net/http'
+require 'rss'
 cgi = CGI.new
 
-mapfile = "libguides-mapping.txt"
+mapfile = "/var/www/libguides-mapping.txt"
 
 libguides_iid = 1669
 
-libguides_domain = "api.libguides.com"
-libguides_path   = "/api_profile.php?iid=#{libguides_iid}&uid="
+#libguides_domain = "api.libguides.com"
+#libguides_path   = "/api_profile.php?iid=#{libguides_iid}&uid="
+
+libguides_profile_url = "http://api.libguides.com/api_profile.php?iid=#{libguides_iid}&uid="
 
 params = cgi.params
 codes = params["codes"][0].split(",")
 
-File.open(mapfile).each do |row|
+html = ""
+
+# Input types:  s:sb/mgmt, s:ap/engl, s:hh/psych
+# Possible tags s:sb/mgmt, s:sb/*, s:hh/psych
+
+File.open(mapfile).each do |row|        # For each person
   profile_info = row.split("|")
-  codes.each do |code|
-    if profile_info[2] =~ /#{code}/i
-      puts Net::HTTP.get(libguides_domain, libguides_path + profile_info[1])
+  subjects = profile_info[2].split(",")
+  librarian_name = profile_info[0]
+  # puts librarian_name
+  subjects.each do |subject|            # look at each subject they handle 
+    subject.gsub!(/s:/, "")
+    # puts subject
+    if /(..)\/\*/.match(subject)        # Wildcard, like s:fa/*
+      faculty = subject[0..1]
+      # puts faculty
+    end
+    codes.each do |code|                # and compare it to the codes passed in
+      # puts code
+      if (subject =~ /#{code}/i) or (!faculty.nil? and code[0..1] == faculty)
+        # puts faculty
+        # Either there is an exact match between code submitted and librarian subject (hh/psych and hh/psych)
+        # or there is a wildcard match (hh/psych and a librarian covers hh/*)
+        url = libguides_profile_url + profile_info[1]
+        html += "<li> <a href=\"#{url}\">#{librarian_name}</a>"
+        # puts Net::HTTP.get(libguides_domain, libguides_path + profile_info[1])
+      end
     end
   end
 end
+
+if html.length == 0
+  # No matches found, so fall back to default
+  html += "<li> <a href=\"http://www.library.yorku.ca/cms/scottreference/\">Scott Library research help</a></li>"
+end
+
+rss = RSS::Maker.make("atom") do |maker|
+  maker.channel.author = "York University Libraries"
+  maker.channel.updated = Time.now.to_s
+  maker.channel.about = "http://researchguides.library.yorku.ca/"
+  maker.channel.title = "My Librarian (York University Libraries)"
+  
+  maker.items.new_item do |item|
+    item.link = "http://researchguides.library.yorku.ca/"
+    item.title = "My Librarian"
+    item.updated = Time.now.to_s
+    item.description = "<ul>" + html + "</ul>"
+
+  end
+end
+
+puts rss
