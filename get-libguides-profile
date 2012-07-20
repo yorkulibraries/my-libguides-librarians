@@ -20,7 +20,7 @@ libguides_iid = 1669
 #libguides_domain = "api.libguides.com"
 #libguides_path   = "/api_profile.php?iid=#{libguides_iid}&uid="
 
-libguides_profile_url = "http://api.libguides.com/api_profile.php?iid=#{libguides_iid}&uid="
+libguides_profile_url = "http://researchguides.library.yorku.ca/profile.php?uid="
 
 params = cgi.params
 codes = params["codes"][0].split(",")
