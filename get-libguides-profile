@@ -1,4 +1,6 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env /usr/local/bin/ruby
+
+##!/usr/bin/env ruby
 
 # William Denton <wtd@pobox.com>
 # Usage:
@@ -11,7 +13,7 @@ require 'net/http'
 require 'rss'
 cgi = CGI.new
 
-mapfile = "/var/www/libguides-mapping.txt"
+mapfile = "/var/www/html/libguides-mapping.txt"
 
 libguides_iid = 1669
 
@@ -74,4 +76,6 @@ rss = RSS::Maker.make("atom") do |maker|
   end
 end
 
+puts "Content-type: application/xml"
+puts
 puts rss
