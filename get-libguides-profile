@@ -1,12 +1,14 @@
 #!/usr/bin/env ruby
 #!/usr/bin/env /usr/local/bin/ruby
 
-
 # William Denton <wtd@pobox.com>
 # Usage:
 #
 # Call as a web service: give it a subject and it will return an RSS feed
 # linking to the LibGuides profile for that subject's librarian
+
+# Input types:  s:sb/mgmt, s:ap/engl, s:hh/psych
+# Possible tags s:sb/mgmt, s:sb/*, s:hh/psych
 
 require 'cgi'
 require 'net/http'
@@ -15,20 +17,10 @@ cgi = CGI.new
 
 mapfile = "/var/www/html/libguides-mapping.txt"
 
-libguides_iid = 1669
-
-#libguides_domain = "api.libguides.com"
-#libguides_path   = "/api_profile.php?iid=#{libguides_iid}&uid="
-
 libguides_profile_url = "http://researchguides.library.yorku.ca/profile.php?uid="
 
 params = cgi.params
 codes = params["codes"][0].split(",")
-
-html = ""
-
-# Input types:  s:sb/mgmt, s:ap/engl, s:hh/psych
-# Possible tags s:sb/mgmt, s:sb/*, s:hh/psych
 
 rss = RSS::Maker.make("atom") do |maker|
   maker.channel.author = "York University Libraries"
@@ -36,7 +28,7 @@ rss = RSS::Maker.make("atom") do |maker|
   maker.channel.about = "http://researchguides.library.yorku.ca/"
   maker.channel.title = "My Librarian (York University Libraries)"
   
-  File.open(mapfile).each do |row|        # For each person
+  File.open(mapfile).each do |row|        # For each librarian
     profile_info = row.split("|")
     subjects = profile_info[2].split(",")
     librarian_name = profile_info[0]
@@ -44,19 +36,15 @@ rss = RSS::Maker.make("atom") do |maker|
     subjects.each do |subject|            # look at each subject they handle 
       subject.gsub!(/s:/, "")
       # puts subject
-      if /(..)\/\*/.match(subject)        # Wildcard, like s:fa/*
+      if /(..)\/\*/.match(subject)        # Check for wildcards like s:fa/*
         faculty = subject[0..1]
         # puts faculty
       end
       codes.each do |code|                # and compare it to the codes passed in
-        # puts code
         if (subject =~ /#{code}/i) or (!faculty.nil? and code[0..1] == faculty)
-          # puts faculty
           # Either there is an exact match between code submitted and librarian subject (hh/psych and hh/psych)
           # or there is a wildcard match (hh/psych and a librarian covers hh/*)
           url = libguides_profile_url + profile_info[1]
-          # html += "<li> <a href=\"#{url}\">#{librarian_name}</a>"
-          # puts Net::HTTP.get(libguides_domain, libguides_path + profile_info[1])
           maker.items.new_item do |item|
             item.link = url
             item.title = librarian_name
@@ -67,13 +55,39 @@ rss = RSS::Maker.make("atom") do |maker|
     end
   end
   
-  if html.length == 0
-    # No matches found, so fall back to default
-    html += "<li> <a href=\"http://www.library.yorku.ca/cms/scottreference/\">Scott Library research help</a></li>"
+  # If no matches were found we fall back to suggesting default ref desks
+  if maker.items.size == 0  
+    codes.each do |code|
+      faculty = code[0..1]      
+      case faculty
+      when "gl" then 
+        url = "http://www.libary.yorku.ca/cms/frost/"
+        title = "Frost Library research help"
+      when "lw" then 
+        url = "http://www.osgoode.yorku.ca/"
+        title = "Law Library research help"
+      when "sb" then 
+        url = "http://www.libary.yorku.ca/cms/bbl/"
+        title = "Bronfman Library research help"
+      when "sc" then 
+        url = "http://www.library.yorku.ca/cms/steacie"
+        title = "Steacie Library research help"
+      else  # Otherwise, default to Scott.
+        url = "http://www.library.yorku.ca/cms/scottreference/"
+        title = "Scott Library research help"
+      end
+      maker.items.new_item do |item|
+        item.link = url
+        item.title = title
+        item.updated = Time.now.to_s
+      end
+    end
   end
-
+  
 end
+
 
 puts "Content-type: application/xml"
 puts
 puts rss
+
