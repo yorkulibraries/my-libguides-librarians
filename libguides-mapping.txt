@@ -1,4 +1,4 @@
-Stacy Allison|42372|s:fa/*
+Stacy Allison|42372|
 Aqeela Anwar|45319|
 Anica Bakalic|43027|
 Juliya Borie|34426|
@@ -40,9 +40,9 @@ Maura Matesic|42383|
 Scott McLaren|42384|
 Louis Mirando|42804|
 Vivienne Monty|42385|
-Rajiv Nariani|39571|s:hh/kine,s:fa/kine
+Rajiv Nariani|39571|
 Business Librarians|44809|
-Rosa Orlandini|42370|s:ap/geog
+Rosa Orlandini|42370|
 Daniel Perlin|42393|
 Christina Pringi|52232|
 Mark Robertson|52964|
@@ -55,7 +55,7 @@ Lisa Sloniowski|42387|
 Stephen Spong|53372|
 Anna St.Onge|43699|
 Kim Stymest|60564|
-Adam Taves|42388|s:hh/psych
+Adam Taves|42388|
 Sharon Wang|33895|
 P. Warren|42390|
 Elizabeth Watson|42391|

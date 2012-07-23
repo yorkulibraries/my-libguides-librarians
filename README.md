@@ -1,7 +1,7 @@
 libguides-profile-grabber
 =========================
 
-Grab profile boxes from Libguides (until LibGuides builds this into the API)
+Get a list of librarians who are responsible for given subjects, and link to their LibGuides profiles.
 
 This is a temporary solution to a problem described at
 [Is it possible to search librarian profiles in LibGuides and embed matches on other pages?](http://libraries.stackexchange.com/questions/650/is-it-possible-to-search-librarian-profiles-in-libguides-and-embed-matches-on-ot)
@@ -24,13 +24,13 @@ I submitted the request to LibGuides (on Twitter!) and they put it into their re
 
 # Usage
 
-Edit your LibGuides instituional ID in each file.
+Edit your LibGuides instituional ID in `make-libguides-mapping`.
 
-Run this as cronjob somewhere: `grok-libguides > librarian-mapping.txt`
+Run this as cronjob somewhere: `make-libguides-mapping > /var/www/html/librarian-mapping.txt` (If you put the file somwhere else, edit `find-my-librarian` to look there.)
 
-Then run `get-libguides-profile` as a CGI, and when you call it, pass in `code=AP/PSYC` or some such code.
+Then run `find-my-librarian` as a CGI, and when you call it, pass in `programs=AP/PSYC` or some such code.  If there are two or more, separate them by commas: `programs=SC/MATH,FA/DANC`
 
-It will return the profile box from LibGuides for all matching librarians.
+It will return an RSS feed of librarians responsible for those subjects. It falls back to reference desks at branches if no individual librarians can be found.
 
 Note: requires that "Subject tags" has been added as a custom field to the librarian profiles.
 

@@ -9,13 +9,12 @@
 # field to the librarian profiles.
 #
 # Usage:
-# ./grok-libguides > libguides-mapping.txt
+# ./make-libguides-map > libguides-mapping.txt
 
 require 'net/http'
 
 # Replace with your LibGuides institutional ID.
 libguides_iid = 1669
-
 
 profile_list = URI("http://api.libguides.com/api_users.php?iid=#{libguides_iid}")
 
