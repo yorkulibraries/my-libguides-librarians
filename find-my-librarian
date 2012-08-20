@@ -2,13 +2,11 @@
 #!/usr/bin/env /usr/local/bin/ruby
 
 # William Denton <wtd@pobox.com>
-# Usage:
+# Usage: find-my-librarian?programs=ap/econ,fa/film
 #
-# Call as a web service: give it a subject and it will return an RSS feed
-# linking to the LibGuides profile for that subject's librarian
-
-# Input types:  s:sb/mgmt, s:ap/engl, s:hh/psych
-# Possible tags s:sb/mgmt, s:sb/*, s:hh/psych
+# Call as a web service: give it a program and it will return an RSS feed
+# linking to the LibGuides profile for the right subject librarian
+# or the right reference desk
 
 require 'cgi'
 require 'net/http'
@@ -28,65 +26,84 @@ if programs.length == 0
   programs[0] = "xx/xxxx"
 end
 
+# Keep a list of librarians/desks recommended.  Don't add one to
+# the My Librarian feed if it's already been added.  (I found it)
+# easier to keep a separate list than grok the RSS structure, but
+# I know it's inelegant.  
+recommended = []
+
 rss = RSS::Maker.make("atom") do |maker|
   maker.channel.author = "York University Libraries"
   maker.channel.updated = Time.now.to_s
   maker.channel.about = "http://researchguides.library.yorku.ca/"
   maker.channel.title = "My Librarian (York University Libraries)"
   
-  File.open(mapfile).each do |row|        # For each librarian
+  File.open(mapfile).each do |row|        # For each librarian ...
     profile_info = row.split("|")
     subjects = profile_info[2].split(",")
     librarian_name = profile_info[0]
     # puts librarian_name
-    subjects.each do |subject|            # look at each subject they handle 
+    subjects.each do |subject|            # look at each subject they handle ...
       subject.gsub!(/s:/, "")
       # puts subject
-      if /(..)\/\*/.match(subject)        # Check for wildcards like s:fa/*
+      if /(..)\/\*/.match(subject)        # check for wildcards like s:fa/* ...
         faculty = subject[0..1]
         # puts faculty
       end
-      programs.each do |program|                # and compare it to the programs passed in
+      programs.each do |program|          # and compare it to the programs passed in
         if (subject =~ /#{program}/i) or (!faculty.nil? and program[0..1] == faculty)
           # Either there is an exact match between program submitted and librarian subject (hh/psych and hh/psych)
           # or there is a wildcard match (hh/psych and a librarian covers hh/*)
           url = libguides_profile_url + profile_info[1]
-          maker.items.new_item do |item|
-            item.link = url
-            item.title = librarian_name
-            item.updated = Time.now.to_s
+          if recommended.index(librarian_name).nil? # The librarian/desk isn't listed already
+            maker.items.new_item do |item|
+              item.link = url
+              item.title = librarian_name
+              item.updated = Time.now.to_s
+            end
+            # Since this program is now matched, remove it from the list
+            programs.delete(program)
+            # And add the librarian/desk to the list so we don't recommend him/her/it again
+            recommended.push(librarian_name)
           end
         end
       end
     end
   end
-  
+
   # If no matches were found we fall back to suggesting default ref desks
-  if maker.items.size == 0  
-    programs.each do |program|
-      faculty = program[0..1]      
-      case faculty
-      when "gl" then 
-        url = "http://www.libary.yorku.ca/cms/frost/"
-        title = "Frost Library research help"
-      when "lw" then 
-        url = "http://www.osgoode.yorku.ca/"
-        title = "Law Library research help"
-      when "sb" then 
-        url = "http://www.libary.yorku.ca/cms/bbl/"
-        title = "Bronfman Library research help"
-      when "sc" then 
-        url = "http://www.library.yorku.ca/cms/steacie"
-        title = "Steacie Library research help"
-      else  # Otherwise, default to Scott.
-        url = "http://www.library.yorku.ca/cms/scottreference/"
-        title = "Scott Library research help"
-      end
+  programs.each do |program|
+    # We're now looping through all of the programs that don't have a known
+    # librarian or research help desk.  There will probably only be one
+    # but there might be two.
+    faculty = program[0..1]      
+    case faculty
+    when "gl" then 
+      url = "http://www.libary.yorku.ca/cms/frost/"
+      title = "Frost Library research help"
+    when "hh" then 
+      url = "http://www.libary.yorku.ca/cms/steacie/"
+      title = "Steacie Library research help"
+    when "lw" then 
+      url = "http://www.osgoode.yorku.ca/"
+      title = "Law Library research help"
+    when "sb" then 
+      url = "http://www.libary.yorku.ca/cms/bbl/"
+      title = "Bronfman Library research help"
+    when "sc" then 
+      url = "http://www.library.yorku.ca/cms/steacie"
+      title = "Steacie Library research help"
+    else  # Otherwise, default to Scott (for fa, ap, es)
+      url = "http://www.library.yorku.ca/cms/scottreference/"
+      title = "Scott Library research help"
+    end
+    if recommended.index(title).nil? # The librarian/desk isn't listed already
       maker.items.new_item do |item|
         item.link = url
         item.title = title
         item.updated = Time.now.to_s
       end
+      recommended.push(title)
     end
   end
   
