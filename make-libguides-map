@@ -33,9 +33,10 @@ Net::HTTP.start(profile_list.host, profile_list.port) do |http|
       content_request = Net::HTTP::Get.new profile_uri.request_uri
       content = http.request content_request # Net::HTTPResponse object
     
-      # <b>Subject tags:</b><BR>s:AB/CDEF,s:ZY/XWVU</div></div></td> etc.
+      # <b>Subject tags:</b><BR>s:ab/cdef,s:zy/xwvu</div></div></td> etc.
       tags = content.body[/Subject tags:<\/b><BR>(.*)<\/div><\/div><\/td>/i, 1] || ""
-
+      tags.gsub!(" ", "")
+      
       # <div class="profile_display_name">Suzanne Dubeau</div>
       name = content.body[/<div class="profile_display_name">([\s\w\.]*)/, 1] || ""
 

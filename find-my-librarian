@@ -22,6 +22,12 @@ libguides_profile_url = "http://researchguides.library.yorku.ca/profile.php?uid=
 params = cgi.params
 programs = params["programs"][0].split(",")
 
+if programs.length == 0
+  # If no program is specified we still want to suggest
+  # the default, so put in a fake program no-one will see
+  programs[0] = "xx/xxxx"
+end
+
 rss = RSS::Maker.make("atom") do |maker|
   maker.channel.author = "York University Libraries"
   maker.channel.updated = Time.now.to_s

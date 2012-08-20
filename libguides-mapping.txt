@@ -10,7 +10,7 @@ Haiyun Cao|42374|
 Sarah Coysh|33784|
 Dana Craig|43701|
 Catherine Davidson|33899|
-William Denton|31463|s:AB/CDEF,s:ZY/XWVU
+William Denton|31463|l:sc/test,l:sb/test,l:ap/test,l:gl/test
 Yemisi Dina|42392|
 Julianna Drexler|33898|
 Suzanne Dubeau|42375|
@@ -32,6 +32,7 @@ Adam Lauder|63616|
 Xuemei Li|50711|
 Reference Librarian|46662|
 Glenda Lowndes|45917|
+Courtney Lundrigran|66795|
 Baby Librarian|31452|
 Klara Maidenberg|43026|
 Ilo Maimets|42382|
@@ -55,7 +56,7 @@ Lisa Sloniowski|42387|
 Stephen Spong|53372|
 Anna St.Onge|43699|
 Kim Stymest|60564|
-Adam Taves|42388|
+Adam Taves|42388|l:gs/psyc,l:hh/psyc,l:gs/econ,l:ap/econ
 Sharon Wang|33895|
 P. Warren|42390|
 Elizabeth Watson|42391|
