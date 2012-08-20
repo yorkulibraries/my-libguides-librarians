@@ -1,7 +1,7 @@
-libguides-profile-grabber
+my-libguides-librarians
 =========================
 
-Get a list of librarians who are responsible for given subjects, and link to their LibGuides profiles.
+Get an RSS feed of librarians who are responsible for given subjects, and link to their LibGuides profiles.
 
 This is a temporary solution to a problem described at
 [Is it possible to search librarian profiles in LibGuides and embed matches on other pages?](http://libraries.stackexchange.com/questions/650/is-it-possible-to-search-librarian-profiles-in-libguides-and-embed-matches-on-ot)
@@ -24,11 +24,11 @@ I submitted the request to LibGuides (on Twitter!) and they put it into their re
 
 # Usage
 
-Edit your LibGuides instituional ID in `make-libguides-mapping`.
+Edit your LibGuides instituional ID in `make-libguides-map`.
 
-Run this as cronjob somewhere: `make-libguides-mapping > /var/www/html/librarian-mapping.txt` (If you put the file somwhere else, edit `find-my-librarian` to look there.)
+Run this as cronjob somewhere: `make-libguides-map > /var/www/html/librarian-mapping.txt` (If you put the file somwhere else, edit `find-my-librarian` to look there.)
 
-Then run `find-my-librarian` as a CGI, and when you call it, pass in `programs=AP/PSYC` or some such code.  If there are two or more, separate them by commas: `programs=SC/MATH,FA/DANC`
+Then run `find-my-librarian` as a CGI, and when you call it, pass in `programs=ap/psyc` or some such code.  If there are two or more, separate them by commas: `programs=sc/math,fa/danc`
 
 It will return an RSS feed of librarians responsible for those subjects. It falls back to reference desks at branches if no individual librarians can be found.
 
