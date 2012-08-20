@@ -26,14 +26,33 @@ I submitted the request to LibGuides (on Twitter!) and they put it into their re
 
 Edit your LibGuides instituional ID in `make-libguides-map`.
 
-Run this as cronjob somewhere: `make-libguides-map > /var/www/html/librarian-mapping.txt` (If you put the file somwhere else, edit `find-my-librarian` to look there.)
+Run this as cronjob somewhere: 
+
+    /path/to/my-libguides-librarians/make-libguides-map > /var/www/html/librarian-mapping.txt
+
+(If you put the file somwhere else, edit `find-my-librarian` to look there.)
 
 Then run `find-my-librarian` as a CGI, and when you call it, pass in `programs=ap/psyc` or some such code.  If there are two or more, separate them by commas: `programs=sc/math,fa/danc`
 
 It will return an RSS feed of librarians responsible for those subjects. It falls back to reference desks at branches if no individual librarians can be found.
 
-Note: requires that "Subject tags" has been added as a custom field to the librarian profiles.
+## Adding the Subject tags field to librarian profiles
+
+This service requires that you add the "Subject tags" custom field to the librarian profiles.
+
+1. Log in to your LibGuides account as an administrator.
+1. Go to Admin Stuff > Accounts
+1. Choose the Profile Options tab
+1. Create a `Subject tags` field
+
+How to edit your subject tags:
+
+1. Log in to LibGuides.
+1. Go to the Dashboard.
+1. Choose "edit" in the top right-hand corner of your profile box.
+1. Look in "Additional Fields" and you'll see the "Subject tags" box
+
+## Note
 
 This is very specific to [York University Libraries](http://www.library.yorku.ca/) right now.
-
 

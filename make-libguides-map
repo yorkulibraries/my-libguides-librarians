@@ -10,6 +10,8 @@
 #
 # Usage:
 # ./make-libguides-map > libguides-mapping.txt
+# Or put it in a crontab
+# @daily /path/to/my-libguides-librarians/make-libguides-map > /var/www/html/libguides-mapping.txt 
 
 require 'net/http'
 
