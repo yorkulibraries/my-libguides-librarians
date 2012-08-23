@@ -18,7 +18,7 @@ mapfile = "/var/www/html/libguides-mapping.txt"
 libguides_profile_url = "http://researchguides.library.yorku.ca/profile.php?uid="
 
 params = cgi.params
-programs = params["programs"][0].split(",")
+programs = params["program_codes"][0].split(",")
 
 if programs.length == 0
   # If no program is specified we still want to suggest
