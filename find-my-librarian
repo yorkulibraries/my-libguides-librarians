@@ -11,17 +11,18 @@
 # Course codes look like this (for "Romain Elegaic Poetry"):
 # 2012_AP_IT_Y_2751__9_A_EN_A_LECT_01
 # 
-# Year    : 2012
-# Faculty : AP
-# Subject : IT
-#         : Y
-# ID      : 2751
-#         : 9
-# Section : A
-# Language: EN
-#         : A
-# Format  : LECT
-# Group   : 01
+# Year           : 2012
+# Faculty        : AP
+# Subject        : IT
+# Period         : Y (F = fall, W = winter, SU, S1, S2 = summer)
+# ID             : 2751
+# Rubric variance: _ (if it is blank, replace with an extra underscore)
+# Credit weight  : 9
+# Section        : A
+# Language       : EN
+# Course type    : A (internal code)
+# Format         : LECT
+# Group          : 01
 
 require 'cgi'
 require 'net/http'
@@ -39,7 +40,7 @@ programs = []
 
 begin
   courses.each do |coursecode|
-    elements = /(\d{4})_(\w*)_(\w*)_(\w)_(\d*)__(\d)_(\w)_(\w{2})_(\w)_(\w*)_(\d{2})/.match(coursecode)
+    elements = /(\d{4})_(\w*)_(\w*)_(\w*)_(\d*)_(.)(\d)_(\w)_(\w{2})_(\w)_(\w*)_(\d{2})/.match(coursecode)
     raise "ERROR: Bad course code #{coursecode}" if elements.nil?
     faculty_code = elements[2]
     program_code = elements[3]
