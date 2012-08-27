@@ -8,6 +8,21 @@
 # linking to the LibGuides profile for the right subject librarian
 # or the right reference desk
 
+# Course codes look like this (for "Romain Elegaic Poetry"):
+# 2012_AP_IT_Y_2751__9_A_EN_A_LECT_01
+# 
+# Year    : 2012
+# Faculty : AP
+# Subject : IT
+#         : Y
+# ID      : 2751
+#         : 9
+# Section : A
+# Language: EN
+#         : A
+# Format  : LECT
+# Group   : 01
+
 require 'cgi'
 require 'net/http'
 require 'rss'
@@ -18,7 +33,21 @@ mapfile = "/var/www/html/libguides-mapping.txt"
 libguides_profile_url = "http://researchguides.library.yorku.ca/profile.php?uid="
 
 params = cgi.params
-programs = params["program_codes"][0].split(",")
+courses = params["courses"][0].split(",")
+
+programs = []
+
+begin
+  courses.each do |coursecode|
+    elements = /(\d{4})_(\w*)_(\w*)_(\w)_(\d*)__(\d)_(\w)_(\w{2})_(\w)_(\w*)_(\d{2})/.match(coursecode)
+    raise "ERROR: Bad course code #{coursecode}" if elements.nil?
+    faculty_code = elements[2]
+    program_code = elements[3]
+    programs.push("#{faculty_code}/#{program_code}")
+  end
+rescue Exception => e 
+  $stderr.puts e
+end
 
 if programs.length == 0
   # If no program is specified we still want to suggest

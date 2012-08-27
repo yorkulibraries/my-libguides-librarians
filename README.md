@@ -32,7 +32,7 @@ Run this as cronjob somewhere:
 
 (If you put the file somwhere else, edit `find-my-librarian` to look there.)
 
-Then run `find-my-librarian` as a CGI, and when you call it, pass in `programs=ap/psyc` or some such code.  If there are two or more, separate them by commas: `programs=sc/math,fa/danc`
+Then run `find-my-librarian` as a CGI, and when you call it, pass in a full York course code, e.g. `courses=2012_AP_IT_Y_2751__9_A_EN_A_LECT_01` or some such code.  If there are two or more, separate them by commas: `courses=2012_AP_IT_Y_2751__9_A_EN_A_LECT_01,2012_AP_HUMA_Y_1105__9_A_EN_A_LECT_01`
 
 It will return an RSS feed of librarians responsible for those subjects. It falls back to reference desks at branches if no individual librarians can be found.
 
