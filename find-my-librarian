@@ -38,6 +38,10 @@ courses = params["courses"][0].split(",")
 
 programs = []
 
+# This script works by looking at only the full coursecodes passed in.
+# It would be easy to make it look at a list of program codes also
+# passed in, too.
+
 begin
   courses.each do |coursecode|
     elements = /(\d{4})_(\w*)_(\w*)_(\w*)_(\d*)_(.)(\d)_(\w)_(\w{2})_(\w)_(\w*)_(\d{2})/.match(coursecode)
