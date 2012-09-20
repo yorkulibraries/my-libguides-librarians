@@ -123,10 +123,10 @@ rss = RSS::Maker.make("atom") do |maker|
       url = "http://www.osgoode.yorku.ca/"
       title = "Law Library research help"
     when "sb" then 
-      url = "http://www.library.yorku.ca/cms/bbl/guides/researchhelp"
+      url = "http://www.library.yorku.ca/cms/bbl/guides/researchhelp/"
       title = "Bronfman Library research help"
     when "sc" then 
-      url = "http://www.library.yorku.ca/cms/steacie"
+      url = "http://www.library.yorku.ca/cms/steacie/"
       title = "Steacie Library research help"
     else  # Otherwise, default to Scott (for fa, ap, es)
       url = "http://www.library.yorku.ca/cms/scottreference/"
