@@ -24,6 +24,11 @@
 # Format         : LECT
 # Group          : 01
 
+# (Note to self regarding other services:
+# "The moodle service breaks the standard course codes into relevant
+# pieces and passes them to the underlying feeds."
+# E.g. http://www.library.yorku.ca/eris/fetch/tagged_urls.rss?prefix=s&tag=ap/it
+
 require 'cgi'
 require 'net/http'
 require 'rss'
