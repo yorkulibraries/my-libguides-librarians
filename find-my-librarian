@@ -34,7 +34,6 @@
 # E.g. http://www.library.yorku.ca/eris/fetch/tagged_urls.rss?prefix=s&tag=ap/it
 
 require 'cgi'
-require 'net/http'
 require 'rss'
 cgi = CGI.new
 
