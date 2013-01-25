@@ -10,7 +10,7 @@ Haiyun Cao|42374|
 Sarah Coysh|33784|
 Dana Craig|43701|
 Catherine Davidson|33899|
-William Denton|31463|l:sc/test,l:sb/test,l:ap/test,l:gl/test
+William Denton|31463|l:2012_AP_IT_Y_2751__9_A_EN_A_LECT_01
 Yemisi Dina|42392|
 Julianna Drexler|33898|
 Suzanne Dubeau|42375|

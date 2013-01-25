@@ -10,7 +10,7 @@
 
 # Course codes look like this (for "Romain Elegaic Poetry"):
 # 2012_AP_IT_Y_2751__9_A_EN_A_LECT_01
-# 
+#
 # Year           : 2012
 # Faculty        : AP
 # Subject        : IT
@@ -34,7 +34,7 @@ mapfile = "/var/www/html/libguides-mapping.txt"
 libguides_profile_url = "http://researchguides.library.yorku.ca/profile.php?uid="
 
 params = cgi.params
-courses = params["courses"][0].split(",")
+courses = params["courses"][0].downcase.split(",")
 
 programs = []
 
@@ -44,14 +44,13 @@ programs = []
 
 begin
   courses.each do |coursecode|
-    coursecode.downcase! # Simplifies things throughout
     elements = /(\d{4})_(\w*)_(\w*)_(\w*)_(\d*)_(.)(\d)_(\w)_(\w{2})_(\w)_(\w*)_(\d{2})/.match(coursecode)
     raise "ERROR: Bad course code #{coursecode}" if elements.nil?
     faculty_code = elements[2]
     program_code = elements[3]
     programs.push("#{faculty_code}/#{program_code}")
   end
-rescue Exception => e 
+rescue Exception => e
   $stderr.puts e
 end
 
@@ -64,7 +63,7 @@ end
 # Keep a list of librarians/desks recommended.  Don't add one to
 # the My Librarian feed if it's already been added.  (I found it)
 # easier to keep a separate list than grok the RSS structure, but
-# I know it's inelegant.  
+# I know it's inelegant.
 recommended = []
 
 rss = RSS::Maker.make("atom") do |maker|
@@ -72,13 +71,19 @@ rss = RSS::Maker.make("atom") do |maker|
   maker.channel.updated = Time.now.to_s
   maker.channel.about = "http://researchguides.library.yorku.ca/"
   maker.channel.title = "My Librarian (York University Libraries)"
-  
+
   File.open(mapfile).each do |row|        # For each librarian ...
     profile_info = row.split("|")
-    subjects = profile_info[2].split(",")
+    subjects = profile_info[2].downcase.chomp.split(",")
     librarian_name = profile_info[0]
-    # puts librarian_name
     subjects.each do |subject|            # look at each subject they handle ...
+      subject.gsub!(/l:/, "")
+      courses.each do |coursecode|
+        if subject == coursecode
+          puts "MATCH"
+          exit
+        end
+      end
       subject.gsub!(/s:/, "")
       # puts subject
       if /(..)\/\*/.match(subject)        # check for wildcards like s:fa/* ...
@@ -113,19 +118,19 @@ rss = RSS::Maker.make("atom") do |maker|
     # but there might be two.
     faculty = program[0..1]
     case faculty
-    when "gl" then 
+    when "gl" then
       url = "http://www.library.yorku.ca/cms/frost/"
       title = "Frost Library research help"
-    when "hh" then 
+    when "hh" then
       url = "http://www.library.yorku.ca/cms/steacie/"
       title = "Steacie Library research help"
-    when "lw" then 
+    when "lw" then
       url = "http://www.osgoode.yorku.ca/library/what-we-do/reference-research"
       title = "Law Library research help"
-    when "sb" then 
+    when "sb" then
       url = "http://www.library.yorku.ca/cms/bbl/guides/researchhelp/"
       title = "Bronfman Library research help"
-    when "sc" then 
+    when "sc" then
       url = "http://www.library.yorku.ca/cms/steacie/"
       title = "Steacie Library research help"
     else  # Otherwise, default to Scott (for fa, ap, es)
@@ -141,7 +146,7 @@ rss = RSS::Maker.make("atom") do |maker|
       recommended.push(title)
     end
   end
-  
+
 end
 
 
