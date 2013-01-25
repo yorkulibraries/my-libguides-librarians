@@ -24,6 +24,10 @@
 # Format         : LECT
 # Group          : 01
 
+# Other good course codes:
+# 2012_HH_PSYC_F_2030__3_A_EN_A_LECT_01 (Introductio to Research Methods)
+# 2012_SC_CSE_F_1710__3_A_EN_A_LAB_03 (Programming for Digital Media)
+
 # (Note to self regarding other services:
 # "The moodle service breaks the standard course codes into relevant
 # pieces and passes them to the underlying feeds."
@@ -36,7 +40,7 @@ cgi = CGI.new
 
 mapfile = "/var/www/html/libguides-mapping.txt"
 
-libguides_profile_url = "http://researchguides.library.yorku.ca/profile.php?uid="
+# libguides_profile_url = "http://researchguides.library.yorku.ca/profile.php?uid="
 
 params = cgi.params
 courses = params["courses"][0].downcase.split(",")
@@ -85,7 +89,7 @@ rss = RSS::Maker.make("atom") do |maker|
       subject.gsub!(/l:/, "")
       courses.each do |coursecode|
         if subject == coursecode
-          puts "MATCH"
+          STDERR.puts "MATCH"
           exit
         end
       end
@@ -99,7 +103,7 @@ rss = RSS::Maker.make("atom") do |maker|
         if (subject =~ /#{program}/i) or (!faculty.nil? and program[0..1] == faculty)
           # Either there is an exact match between program submitted and librarian subject (hh/psych and hh/psych)
           # or there is a wildcard match (hh/psych and a librarian covers hh/*)
-          url = libguides_profile_url + profile_info[1]
+          url = profile_info[1]
           if recommended.index(librarian_name).nil? # The librarian/desk isn't listed already
             maker.items.new_item do |item|
               item.link = url

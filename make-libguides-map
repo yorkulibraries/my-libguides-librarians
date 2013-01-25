@@ -14,38 +14,51 @@
 # @daily /path/to/my-libguides-librarians/make-libguides-map > /var/www/html/libguides-mapping.txt 
 
 require 'net/http'
+require 'open-uri'
+require 'rubygems'
+require 'nokogiri'
 
 # Replace with your LibGuides institutional ID.
 libguides_iid = 1669
 
-profile_list = URI("http://api.libguides.com/api_users.php?iid=#{libguides_iid}")
+profiles_url = "http://api.libguides.com/api_users.php?iid=#{libguides_iid}&break=li"
 
-Net::HTTP.start(profile_list.host, profile_list.port) do |http|
-  request = Net::HTTP::Get.new profile_list.request_uri
-  response = http.request request # Net::HTTPResponse object
+profiles = Nokogiri::HTML(open(profiles_url))
 
-  response.body.each_line do |line|
-    uid = line[/uid=(\d+)/, 1]
-
-    profile_uri = URI("http://api.libguides.com/api_profile.php?incempty=false&iid=#{libguides_iid}&uid=#{uid}")
-
-    # puts profile_uri
-    
-    Net::HTTP.start(profile_uri.host, profile_uri.port) do |http|
-      content_request = Net::HTTP::Get.new profile_uri.request_uri
-      content = http.request content_request # Net::HTTPResponse object
-    
-      # <b>Subject tags:</b><BR>s:ab/cdef,s:zy/xwvu</div></div></td> etc.
-      tags = content.body[/Subject tags:<\/b><BR>(.*)<\/div><\/div><\/td>/i, 1] || ""
-      tags.gsub!(" ", "")
-      
-      # <div class="profile_display_name">Suzanne Dubeau</div>
-      name = content.body[/<div class="profile_display_name">([\s\w\.]*)/, 1] || ""
-
-      puts name + "|" + uid + "|" + tags
-    
+profiles.xpath("//li/a").each do |a|
+  url = a["href"]
+  name = a.text
+  uid = url[/uid=(\d+)/, 1]
+  if ! uid
+    # STDERR.puts "(No uid found for #{name}; probing for true_page_url)"
+    # Probably a customized friendly URL like http://researchguides.library.yorku.ca/profile/kstymest
+    # We need to inspect the HTML of that page and look for where the true_page_url variable is set
+    open(url) do |f|
+      unless f.status[0] == "200"
+        STDERR.puts f.status
+      else
+        html = f.read
+        # Match var true_page_url = 'http://researchguides.library.yorku.ca/profile.php?uid=31463';
+        true_page_url = /true_page_url\s*=\s*'(.*)'/.match(html)[1]
+        # And pick out the uid 
+        uid = true_page_url[/uid=(\d+)/, 1]
+      end
     end
-
+  end
+  profile_url = "http://api.libguides.com/api_profile.php?incempty=false&iid=#{libguides_iid}&uid=#{uid}"
+  # STDERR.puts "#{name} #{profile_url}"
+  open(profile_url) do |f|
+    unless f.status[0] == "200"
+      STDERR.puts f.status
+    else
+      html = f.read
+      # puts html
+      # <b>Subject tags:</b><BR>s:ab/cdef,s:zy/xwvu</div></div></td> etc.
+      tags = html[/Subject tags:<\/b><BR>(.*)<\/div><\/div><\/td>/i, 1] || ""
+      tags.gsub!(" ", "")
+      # <div class="profile_display_name">Suzanne Dubeau</div>
+      name = html[/<div class="profile_display_name">([\s\w\.]*)/, 1] || ""
+      puts name + "|" + url + "|" + tags    end
   end
 
 end
