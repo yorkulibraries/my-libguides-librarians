@@ -13,7 +13,7 @@
 # Or put it in a crontab
 # @daily /path/to/my-libguides-librarians/make-libguides-map > /var/www/html/libguides-mapping.txt 
 
-require 'net/http'
+# require 'net/http'
 require 'open-uri'
 require 'rubygems'
 require 'nokogiri'
