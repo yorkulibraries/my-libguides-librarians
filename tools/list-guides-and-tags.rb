@@ -10,6 +10,8 @@ require 'open-uri'
 require 'rubygems'
 require 'nokogiri'
 
+require 'csv'
+
 iid = 1669
 
 # Restrict to a group of guides
@@ -20,20 +22,27 @@ guides_url = "http://api.libguides.com/api_search.php?iid=#{iid}&more=false&targ
 
 guides = Nokogiri::HTML(open(guides_url))
 
-# Run through each <li> in the list
-guides.xpath("//li").each do |l|
-  # Pick out the URL ...
-  url = l.css("a").attribute("href")
-  title = l.css("a").text
-  print "#{title}\t"
-  # ... then download it and parse it ...
-  guide_html = Nokogiri::HTML(open(url))
-  #  ... thankfully, we can depend on a reliable HTML structure (I hope),
-  # and the tags will always be listed in the same place.
-  guide_html.xpath("//span[@class='guidetags']").each do |s|
-    # s.xpath("a").each do |a|
-    print s.xpath("a").map {|x| x.text}.join(",")
+csv_string = CSV.generate do |csv|
+  csv << ["name", "tags", "url"]
+  # Run through each <li> in the list
+  guides.xpath("//li").each do |l|
+    # Pick out the URL ...
+    url = l.css("a").attribute("href")
+    title = l.css("a").text
+    STDERR.puts title
+    # print "#{title}\t"
+    # ... then download it and parse it ...
+    guide_html = Nokogiri::HTML(open(url))
+    #  ... thankfully, we can depend on a reliable HTML structure (I hope),
+    # and the tags will always be listed in the same place.
+    tags = ""
+    guide_html.xpath("//span[@class='guidetags']").each do |s|
+      # s.xpath("a").each do |a|
+      tags = s.xpath("a").map {|x| x.text}.join(",")
+    end
+    csv << [title, tags, url]
   end
-  print "\n"
 end
+
+puts csv_string
 
