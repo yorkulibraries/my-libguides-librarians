@@ -17,7 +17,7 @@ Astronomy,"s:gs/phas,s:sc/spsc",http://researchguides.library.yorku.ca/astronomy
 Biochemistry,"s:ak/biol,s:ak/chem,s:as/biol,s:as/chem,s:ed/biol,s:ed/chem,s:gs/biol,s:gs/chem,s:sc/bchm,s:sc/biol,s:sc/chem,s:sx/apbi",http://researchguides.library.yorku.ca/biochemistry?hs=a
 Biography,"",http://researchguides.library.yorku.ca/biography?hs=a
 Bioinformatics,"",http://researchguides.library.yorku.ca/biol3100?hs=a
-Biol2050,"",http://researchguides.library.yorku.ca/biol2050?hs=a
+BIOL 2050,"",http://researchguides.library.yorku.ca/biol2050?hs=a
 Biology,"s:ap/biol,s:ap/nats,s:ed/biol,s:es/biol,s:gl/nats,s:gs/biol,s:sc/apbi,s:sc/bchm,s:sc/biol",http://researchguides.library.yorku.ca/biology?hs=a
 Bloomberg,"",http://researchguides.library.yorku.ca/bloomberg?hs=a
 Book Reviews,"",http://researchguides.library.yorku.ca/bookreviews?hs=a
@@ -49,6 +49,7 @@ Data & Statistics,"",http://researchguides.library.yorku.ca/data?hs=a
 Datastream,"",http://researchguides.library.yorku.ca/datastream?hs=a
 Disaster & Emergency Management,"s:ap/dems,s:gs/dems",http://researchguides.library.yorku.ca/disasterandemergencymanagement?hs=a
 Drake Lab: Biomechanics,"",http://researchguides.library.yorku.ca/drakelab?hs=a
+EATS 3300: Guide to Geospatial Data Resources,"c:all,c:sc/eats3300",http://researchguides.library.yorku.ca/eats3300?hs=a
 EATS 4400: Guide to Geospatial Data Resources,"c:all,c:gs/eats5400,c:sc/eats4400",http://researchguides.library.yorku.ca/eats4400?hs=a
 Economics,"s:ad/ilbs,s:ad/mblb,s:ak/buec,s:ak/econ,s:ap/buec,s:ap/ecob,s:ap/econ,s:ap/fbec,s:ap/mgec,s:as/ecob,s:as/econ,s:as/mgec,s:ed/econ,s:es/econ,s:fa/mgec,s:gl/buec,s:gl/econ,s:gs/econ,s:sb/*",http://researchguides.library.yorku.ca/economics?hs=a
 Education,"s:ap/educ,s:ap/gned,s:ed/*,s:ed/ece,s:gs/educ",http://researchguides.library.yorku.ca/education?hs=a
@@ -58,6 +59,7 @@ English Literature,"s:ak/en,s:ap/en,s:ap/enpr,s:as/en,s:ed/en,s:es/en,s:gl/en,s:
 Environmental Studies,s:es/*,http://researchguides.library.yorku.ca/environmentalstudies?hs=a
 ENVS 3520: Applications of Geographic Information Systems in Environmental Studies,"",http://researchguides.library.yorku.ca/envs3520?hs=a
 ENVS 4520: GIS Applications in Environmental Studies,"c:all,c:es/envs4520",http://researchguides.library.yorku.ca/envs4520_2013?hs=a
+Eresources MARC Records Processing,"",http://researchguides.library.yorku.ca/content.php?hs=a&pid=441844
 ESL 1000: Canadian Language & Culture,"",http://researchguides.library.yorku.ca/esl1000?hs=a
 ESL 1450: Thinking About Contemporary Canada,"c:2012_ap_esl_y_1450__6_e_en_a_semr_01,c:all",http://researchguides.library.yorku.ca/esl1450?hs=a
 Family Law,"",http://researchguides.library.yorku.ca/familylaw?hs=a
@@ -72,37 +74,26 @@ French literature,"francais,french,literature,litterature,s:ed/fr,s:es/fr,s:gs/e
 Gender & the Law,"",http://researchguides.library.yorku.ca/content.php?hs=a&pid=295780
 General Research Guide,"",http://researchguides.library.yorku.ca/general?hs=a
 GEOG 2310 Introduction to Refugee and Migration Studies,"c:all,c:ap/geog2310",http://researchguides.library.yorku.ca/GEOG2310?hs=a
-GEOG 2350 - Introduction to Geoinformatics ,"",http://researchguides.library.yorku.ca/geog2350?hs=a
+GEOG 2350 - Introduction to Geoinformatics ,"c:all,c:ap/geog2350",http://researchguides.library.yorku.ca/geog2350?hs=a
 Geography,"s:ap/geog,s:ed/envs,s:ed/geog,s:es/envs,s:gs/envs,s:gs/ess,s:gs/geog,s:sc/eats,s:sc/geog",http://researchguides.library.yorku.ca/geography?hs=a
 Geospatial Data,"c:ap/geog2350,c:ap/geog3180,c:ap/geog3440,c:ap/geog4340,c:ap/geog4440,c:es/4521,c:es/envs3521,c:es/envs4520,c:gs/ess5180,c:gs/ess5400,c:sc/eats3300,c:sc/eats4220,c:sc/eats4400,c:sc/eats4630,c:sc/eng4130",http://researchguides.library.yorku.ca/geospatial?hs=a
 GER 2790 / HUMA 2190 : Germany Through the Ages,"",http://researchguides.library.yorku.ca/ger2790?hs=a
-GL/ECON 3300 Managerial Economics,"",http://researchguides.library.yorku.ca/content.php?hs=a&pid=384273
 GL/ECON 4290: International Economics,s:gl/econ,http://researchguides.library.yorku.ca/content.php?hs=a&pid=375729
-GL/ENSL 2700 Academic Foundations,"",http://researchguides.library.yorku.ca/content.php?hs=a&pid=390164
-GL/HIST 2000 Comment Ãtudier l'Histoire,s:gl/hist,http://researchguides.library.yorku.ca/content.php?hs=a&pid=377971
+GL/ENSL 3800 Dealing With Viewpoint ,"",http://researchguides.library.yorku.ca/ensl3800?hs=a
 GL/HIST 2000 How to Study History,"",http://researchguides.library.yorku.ca/content.php?hs=a&pid=417641
 "GL/HIST 3345 Immigration Experience, U.S. 1840-1930","",http://researchguides.library.yorku.ca/hist3345?hs=a
-GL/HUMA 2634 Spatiality and Spatial Representation,"",http://researchguides.library.yorku.ca/content.php?hs=a&pid=397605
 GL/ILST 2200 International Society,"",http://researchguides.library.yorku.ca/ilst2200en?hs=a
 GL/ILST 2200 SociÃ©tÃ© Internationale,"",http://researchguides.library.yorku.ca/ilst2200fr?hs=a
 GL/ILST 2655: Global Geography: Physical and Human Aspects,s:gl/ilst,http://researchguides.library.yorku.ca/ilst2655?hs=a
 GL/ILST 3505: Recherche en Ãtudes internationales ,s:gl/ilst,http://researchguides.library.yorku.ca/ILST3505F?hs=a
-"GL/NATS 1605 Communication, Health and Environment","",http://researchguides.library.yorku.ca/content.php?hs=a&pid=406792
 GL/POLS 2500 Introduction Ã  l'administration et aux politiques publiques ,"",http://researchguides.library.yorku.ca/pols2500?hs=a
-GL/POLS 2510 Introduction to Comparative Politics,"",http://researchguides.library.yorku.ca/content.php?hs=a&pid=388836
 GL/POLS 2600 Introduction Ã  la politique canadienne,"",http://researchguides.library.yorku.ca/pols2600fr?hs=a
-GL/POLS 2920 Introduction aux Relations Internationales,"",http://researchguides.library.yorku.ca/content.php?hs=a&pid=403157
 GL/POLS 3360 La Politique du QuÃ©bec/Politics in Quebec,"",http://researchguides.library.yorku.ca/pols3360?hs=a
-GL/Skills Course,"",http://researchguides.library.yorku.ca/content.php?hs=a&pid=390302
+GL/POLS 3615 International and Transnational Organizations: Global Governance ,"",http://researchguides.library.yorku.ca/pols3615?hs=a
 GL/SOCI 2010 Canadian Society,"",http://researchguides.library.yorku.ca/SOCI2010?hs=a
-GL/SOCI 2520 (Deviance),s:gl/soci,http://researchguides.library.yorku.ca/content.php?hs=a&pid=376555
 GL/SOCI 3980 The Sociology of Environmental Issues ,"",http://researchguides.library.yorku.ca/soci3980?hs=a
 GL/SP 3300 - Spanish Literature and Civilization,"",http://researchguides.library.yorku.ca/sp3300?hs=a
-GL/SP 4460 Latin American Women Writers of the XX Century,"",http://researchguides.library.yorku.ca/content.php?hs=a&pid=382625
 GL/SP3400 Spanish-American Literature,"",http://researchguides.library.yorku.ca/Spanish-American?hs=a
-GL/TRAD 3260 Documentation,"",http://researchguides.library.yorku.ca/content.php?hs=a&pid=424514
-GL/TRAD 3260 Translation,s:gl/tran,http://researchguides.library.yorku.ca/content.php?hs=a&pid=378241
-GL/TRAN 3260 -- Documentacion,s:gl/tran,http://researchguides.library.yorku.ca/content.php?hs=a&pid=376573
 GL/WMST 3510 Women and Work,"",http://researchguides.library.yorku.ca/wmst3510?hs=a
 Government Information Links,"",http://researchguides.library.yorku.ca/content.php?hs=a&pid=244791
 "Government Information on the Internet: Provincial, Territorial and Municipal Governments","",http://researchguides.library.yorku.ca/content.php?hs=a&pid=245937
@@ -131,8 +122,9 @@ HUMA 1650: Networked Imagination,"",http://researchguides.library.yorku.ca/conte
 HUMA 1745: Thinking About Contemporary Canada,"",http://researchguides.library.yorku.ca/content.php?hs=a&pid=363317
 HUMA 1780: Stories in Diverse Media ,"",http://researchguides.library.yorku.ca/content.php?hs=a&pid=365056
 HUMA 1970: The Worlds of Childhood,"",http://researchguides.library.yorku.ca/huma1970?hs=a
-HUMA 2680: Early Times: Literature and the Imagination of the Child,"",http://researchguides.library.yorku.ca/huma2680?hs=a
+HUMA 2680: Early Times: Literature and the Imagination of the Child,"c:all,c:ap/huma2680",http://researchguides.library.yorku.ca/huma2680?hs=a
 HUMA 2751: Aspects of Italian Culture,"",http://researchguides.library.yorku.ca/content.php?hs=a&pid=365117
+HUMA 3695: Listening to Children,"",http://researchguides.library.yorku.ca/huma3695?hs=a
 HUMA 4142: Contemporary Children's Culture,"",http://researchguides.library.yorku.ca/huma4142?hs=a
 Human Rights & Equity Studies,s:ap/hreq,http://researchguides.library.yorku.ca/humanrights?hs=a
 Human Rights in Africa,"",http://researchguides.library.yorku.ca/humanrightsafrica?hs=a
@@ -178,6 +170,8 @@ Nonprofit Research,"s:ap/adms,s:sb/npmg",http://researchguides.library.yorku.ca/
 Nursing,"s:ak/nurs,s:ap/nurp,s:ap/nurs,s:gs/hcnp,s:gs/scn,s:hh/hinf,s:hh/hlst,s:hh/hman,s:hh/hpol,s:hh/kine,s:hh/nurs,s:hh/pkin",http://researchguides.library.yorku.ca/nursing?hs=a
 Occupy Movement Research Guide,"",http://researchguides.library.yorku.ca/occupy?hs=a
 Olympics,"s:as/kine,s:as/phed,s:ed/kine,s:ed/phed,s:es/kine,s:es/phed,s:fa/kine,s:gs/kahs,s:gs/phed,s:hh/kine,s:hh/pkin,sports",http://researchguides.library.yorku.ca/olympics?hs=a
+Online Services,"",http://researchguides.library.yorku.ca/onlinelegalservices?hs=a
+Open Access Across Canadian Universities,"",http://researchguides.library.yorku.ca/oa?hs=a
 Open Access Publishing Toolkit,"",http://researchguides.library.yorku.ca/open_access?hs=a
 Permanent Links,"",http://researchguides.library.yorku.ca/permalinks?hs=a
 Philosophy,"aesthetics,empiricism,epistemology,ethics,existentialism,god,idealism,logic,metaphysics,phenomenology,philosophy,pragmatism,rationalism,s:ak/phil,s:ak/spth,s:ap/phil,s:as/phil,s:as/spth,s:ed/phil,s:gl/modr,s:gl/phil,s:gs/phil,s:gs/so",http://researchguides.library.yorku.ca/philosophy?hs=a
@@ -193,6 +187,7 @@ Psychology,"s:ap/cogs,s:ap/psyc,s:gl/psyc,s:gs/psyc,s:hh/nurs,s:hh/psyc",http://
 PsycINFO Guide,"s:ak/psyc,s:ap/psyc,s:as/psyc,s:es/psyc,s:fa/psyc,s:gl/psyc,s:gs/psyc,s:hh/psyc,s:sc/psyc",http://researchguides.library.yorku.ca/psycinfo?hs=a
 Public Policy,"politique publique,public policy,s:ad/puad,s:ak/hpol,s:ak/pajs,s:ak/ppa,s:ak/ppm,s:ap/pajs,s:ap/ppa,s:ap/ppm,s:ap/puad,s:as/ppa,s:gs/ppal,s:gs/puia,s:hh/hpol,s:sb/puad",http://researchguides.library.yorku.ca/publicpolicy?hs=a
 Race & Ethnicity,"s:ak/rei,s:ap/anth,s:ap/rei",http://researchguides.library.yorku.ca/race_ethnicity?hs=a
+Reference resources,"",http://researchguides.library.yorku.ca/reference?hs=a
 Religion,"atheism,bible,buddhism,catholicism,christianity,church history,ecclesiology,eschatology,god,hinduism,islam,judaism,karma,mosque,protestantism,qu'ran,religion,s:ak/rels,s:ap/rels,s:as/arab,s:as/rels,s:ed/rels,s:ed/rled,shia,sikh",http://researchguides.library.yorku.ca/religion?hs=a
 Research Guides,"",http://researchguides.library.yorku.ca/content.php?hs=a&pid=220564
 Research Guides,"",http://researchguides.library.yorku.ca/content.php?hs=a&pid=245960
